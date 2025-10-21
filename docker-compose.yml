@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: gateway-postgres
+    environment:
+      POSTGRES_DB: gateway_db
+      POSTGRES_USER: gateway_user
+      POSTGRES_PASSWORD: gateway_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gateway-network
+
+volumes:
+  postgres_data:
+
+networks:
+  gateway-network:
+    driver: bridge
