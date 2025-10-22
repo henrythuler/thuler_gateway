@@ -99,11 +99,11 @@ public class Cobranca {
         return this.status == CobrancaStatus.CANCELADA;
     }
 
-    public boolean foiPagaNoDebito() {
+    public boolean foiPagaComSaldo() {
         return isPaga() && this.tipoPagamento == TipoPagamento.SALDO;
     }
 
-    public boolean foiPagaNoCredito() {
+    public boolean foiPagaComCartao() {
         return isPaga() && this.tipoPagamento == TipoPagamento.CARTAO_CREDITO;
     }
 }
