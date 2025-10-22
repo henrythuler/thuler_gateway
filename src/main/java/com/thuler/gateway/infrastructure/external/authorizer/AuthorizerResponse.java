@@ -22,11 +22,11 @@ public class AuthorizerResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class AuthorizerData {
-        @JsonProperty("authorization")
-        private Boolean authorization;
+        @JsonProperty("authorized")
+        private Boolean authorized;
     }
 
     public boolean isAutorizado() {
-        return data != null && Boolean.TRUE.equals(data.getAuthorization());
+        return data != null && Boolean.TRUE.equals(data.getAuthorized());
     }
 }
