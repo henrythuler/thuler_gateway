@@ -1,0 +1,71 @@
+# ============================================
+# EXEMPLO DE CONFIGURAÇÃO - Payment Gateway
+# ============================================
+
+spring:
+  application:
+    name: payment-gateway
+
+  # ============================================
+  # CONFIGURAÇÃO DO BANCO DE DADOS
+  # ============================================
+  datasource:
+    # Para Docker: use "postgres" como host
+    # Para local: use "localhost"
+    url: jdbc:postgresql://localhost:5432/gateway_db
+    username: gateway_user
+    password: gateway_pass
+    driver-class-name: org.postgresql.Driver
+
+  # ============================================
+  # CONFIGURAÇÃO DO JPA/HIBERNATE
+  # ============================================
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# ============================================
+# CONFIGURAÇÃO DO SERVIDOR
+# ============================================
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# ============================================
+# CONFIGURAÇÃO DO SWAGGER/OPENAPI
+# ============================================
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+jwt:
+  secret: my-super-secret-key-for-jwt-token-generation-must-be-at-least-256-bits-long
+
+  # Tempo de expiração em milissegundos
+  # 86400000 = 24 horas
+  # 3600000 = 1 hora
+  expiration: 86400000
+
+authorizer:
+  # URL do serviço autorizador de transações
+  url: https://zsy6tx7aql.execute-api.sa-east-1.amazonaws.com/authorizer
+
+# ============================================
+# CONFIGURAÇÃO DE LOGS
+# ============================================
+logging:
+  level:
+    root: INFO
+    com.thuler.gateway: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework.web: DEBUG
